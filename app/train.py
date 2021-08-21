@@ -159,21 +159,21 @@ def cli() -> None:
             , help="The value of gamma in PPO")
   parser.add_argument("--timesteps_per_actorbatch", "-tpa",  type = int, default = 3000
             , help="How many timesteps should each actor contribute to the batch?")
-  parser.add_argument("--clip_param", "-c",  type = float, default = 0.1
+  parser.add_argument("--clip_param", "-c",  type = float, default = 0.3
             , help="The clip paramater in PPO")
   parser.add_argument("--entcoeff", "-ent",  type = float, default = 0.0
             , help="The entropy coefficient in PPO")
 
   parser.add_argument("--optim_epochs", "-oe",  type = int, default = 4
             , help="The number of epoch to train the PPO agent per batch")
-  parser.add_argument("--optim_stepsize", "-os",  type = float, default = 1e-5
+  parser.add_argument("--optim_stepsize", "-os",  type = float, default = 1e-4
             , help="The step size for the PPO optimiser")
   parser.add_argument("--optim_batchsize", "-ob",  type = int, default = 256
             , help="The minibatch size in the PPO optimiser")
             
   parser.add_argument("--lam", "-l",  type = float, default = 0.95
             , help="The value of lambda in PPO")
-  parser.add_argument("--adam_epsilon", "-a",  type = float, default = 1e-08
+  parser.add_argument("--adam_epsilon", "-a",  type = float, default = .001
             , help="The value of epsilon in the Adam optimiser")
 
   # Extract args
