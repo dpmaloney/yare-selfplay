@@ -194,7 +194,6 @@ class YareEnv(gym.Env):
     @property
     def observation(self):
         #convert currentplaynum to player_id
-        np.seterr(all='raise')
 
         player_id = self.current_player_num
         myEnergyCap = 0
@@ -213,7 +212,7 @@ class YareEnv(gym.Env):
         myEng400enemyBase  = 0
         enemyShape = 0
 
-        opEng = round(self.lib.outpost_energy(0)/1000, 3)
+        opEng = round(self.lib.outpost_energy(0)/1000, 6)
         opFriendly = 0
         if(self.lib.outpost_player_id(0) == player_id):
             opFriendly = 1
@@ -269,20 +268,20 @@ class YareEnv(gym.Env):
                     enemyEng400MyBase += self.lib.spirit_energy(i)
 
 
-        out = np.array([round(myEnergyCap/10000, 4),
-        round(myEnergy/10000, 4),
-        round(myEnergyCapOp/10000, 4),
-        round(myEnergyOp/10000, 4),
-        round(enemyEng800MyBase/10000, 4),
-        round(enemyEng400MyBase/10000, 4),
+        out = np.array([round(myEnergyCap/1000, 6),
+        round(myEnergy/10000, 6),
+        round(myEnergyCapOp/10000, 6),
+        round(myEnergyOp/10000, 6),
+        round(enemyEng800MyBase/10000, 6),
+        round(enemyEng400MyBase/10000, 6),
         myShape,
 
-        round(enemyEnergyCap/10000, 4),
-        round(enemyEnergy/10000, 4),
-        round(enemyEnergyCapOp/10000, 4),
-        round(enemyEnergyOp/10000, 4),
-        round(myEng800enemyBase/10000, 4),
-        round(myEng400enemyBase/10000, 4),
+        round(enemyEnergyCap/10000, 6),
+        round(enemyEnergy/10000, 6),
+        round(enemyEnergyCapOp/10000, 6),
+        round(enemyEnergyOp/10000, 6),
+        round(myEng800enemyBase/10000, 6),
+        round(myEng400enemyBase/10000, 6),
         enemyShape,
 
         opEng,
@@ -290,6 +289,7 @@ class YareEnv(gym.Env):
         ])
 
         out = np.append(out, self.legal_actions)
+        #print(out)
 
         return out
 
@@ -349,16 +349,16 @@ class YareEnv(gym.Env):
             else:
                 for i in range(self.lib.spirit_count()):
                     if(self.lib.spirit_id(i).player_id == 0):
-                        reward[0] = reward[0] + round(self.lib.spirit_energy_capacity(i)/10000, 4)
-                        reward[1] = reward[1] - round(self.lib.spirit_energy_capacity(i)/10000, 4)
+                        reward[0] = reward[0] + round(self.lib.spirit_energy_capacity(i)/100000, 6)
+                        #reward[1] = reward[1] - round(self.lib.spirit_energy_capacity(i)/10000, 4)
                     else:
-                        reward[1] = reward[1] + round(self.lib.spirit_energy_capacity(i)/10000, 4)
-                        reward[0] = reward[0] - round(self.lib.spirit_energy_capacity(i)/10000, 4)
+                        reward[1] = reward[1] + round(self.lib.spirit_energy_capacity(i)/100000, 6)
+                        #reward[0] = reward[0] - round(self.lib.spirit_energy_capacity(i)/10000, 4)
 
         
                 
 
-        reward = [round(reward[0], 4) ,round(reward[1], 4)]
+        reward = [round(reward[0], 6) ,round(reward[1], 6)]
         self.current_player_num = (self.current_player_num + 1) % self.n_players
 
         if self.current_player_num == 0:

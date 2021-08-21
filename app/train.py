@@ -149,31 +149,31 @@ def cli() -> None:
   parser.add_argument("--seed", "-s",  type = int, default = 17
             , help="Random seed")
 
-  parser.add_argument("--eval_freq", "-ef",  type = int, default = 6000
+  parser.add_argument("--eval_freq", "-ef",  type = int, default = 20480
             , help="How many timesteps should each actor contribute before the agent is evaluated?")
-  parser.add_argument("--n_eval_episodes", "-ne",  type = int, default = 5
+  parser.add_argument("--n_eval_episodes", "-ne",  type = int, default = 10
             , help="How many episodes should each actor contirbute to the evaluation of the agent")
   parser.add_argument("--threshold", "-t",  type = float, default = 0.2
             , help="What score must the agent achieve during evaluation to 'beat' the previous version?")
   parser.add_argument("--gamma", "-g",  type = float, default = 0.99
             , help="The value of gamma in PPO")
-  parser.add_argument("--timesteps_per_actorbatch", "-tpa",  type = int, default = 3000
+  parser.add_argument("--timesteps_per_actorbatch", "-tpa",  type = int, default = 2048
             , help="How many timesteps should each actor contribute to the batch?")
-  parser.add_argument("--clip_param", "-c",  type = float, default = 0.3
+  parser.add_argument("--clip_param", "-c",  type = float, default = 0.1
             , help="The clip paramater in PPO")
   parser.add_argument("--entcoeff", "-ent",  type = float, default = 0.0
             , help="The entropy coefficient in PPO")
 
   parser.add_argument("--optim_epochs", "-oe",  type = int, default = 4
             , help="The number of epoch to train the PPO agent per batch")
-  parser.add_argument("--optim_stepsize", "-os",  type = float, default = 1e-4
+  parser.add_argument("--optim_stepsize", "-os",  type = float, default = 1e-5
             , help="The step size for the PPO optimiser")
-  parser.add_argument("--optim_batchsize", "-ob",  type = int, default = 256
+  parser.add_argument("--optim_batchsize", "-ob",  type = int, default = 1024
             , help="The minibatch size in the PPO optimiser")
             
-  parser.add_argument("--lam", "-l",  type = float, default = 0.95
+  parser.add_argument("--lam", "-l",  type = float, default = 0.98
             , help="The value of lambda in PPO")
-  parser.add_argument("--adam_epsilon", "-a",  type = float, default = .001
+  parser.add_argument("--adam_epsilon", "-a",  type = float, default = 1e-5
             , help="The value of epsilon in the Adam optimiser")
 
   # Extract args
